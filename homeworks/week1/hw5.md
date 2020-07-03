@@ -8,7 +8,6 @@
 * javascript 是在網頁上寫程式，提供跟頁面上的互動和資料的溝通
   
 **後端** server 可能用不同的程式語言，如：PHP、RubyOnRails等技術，來處理 database 的運作。
-
 * 在 Mac 上可以用 `$ nslookup [網址]` 查詢網址的 IP 位置。
   
 ---
