@@ -1,10 +1,14 @@
 function join(arr, concatStr) {
-    var joinArr = ''
-    for(var i = 0; i < arr.length; i++){
-        joinArr += arr[i]
-        joinArr += concatStr
+    if(arr.length === 0){ // 處理空陣列
+        return '';
     }
-    return joinArr;
+
+    var joinArr = arr[0] //取陣列第一個值
+    for (var i = 1; i < arr.length; i++){
+        joinArr += concatStr + arr[i];
+    }
+    return joinArr; //如果陣列長度為1，不會進入上面for迴圈，直接回傳陣列第一個值
+
 }
 
 function repeat(str, times) {
