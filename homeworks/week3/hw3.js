@@ -1,5 +1,5 @@
 function solve(lines) {
-  for (let i = 1; i <= lines[0]; i += 1) {
+  for (let i = 1; i <= Number(lines[0]); i += 1) {
     if (Number(lines[i]) === 1) {
       console.log('Composite');
     } else if (Number(lines[i]) === 2) {
