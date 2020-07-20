@@ -1,11 +1,10 @@
-/* eslint eqeqeq: 0 */
 function solve(lines) {
   const origin = lines.toString();
   let compare = '';
   for (let i = origin.length - 1; i >= 0; i -= 1) {
     compare += origin[i];
   }
-  if (lines == compare) {
+  if (origin === compare) {
     console.log('True');
   } else {
     console.log('False');
