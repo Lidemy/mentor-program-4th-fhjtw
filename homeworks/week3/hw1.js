@@ -1,11 +1,15 @@
+function star(n) {
+  let printStars = '';
+  for (let i = 1; i <= n; i += 1) {
+    printStars += '*';
+  }
+  console.log(printStars);
+}
+
 function solve(lines) {
   const N = Number(lines[0]);
-  for (let i = 1; i <= N; i += 1) {
-    let starQueue = '';
-    for (let j = 1; j <= i; j += 1) {
-      starQueue += '*';
-    }
-    console.log(starQueue);
+  for (let j = 1; j <= N; j += 1) {
+    star(j);
   }
 }
 
