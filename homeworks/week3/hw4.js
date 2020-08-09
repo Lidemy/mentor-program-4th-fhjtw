@@ -1,15 +1,14 @@
-function solve(lines) {
-  const origin = lines.toString();
+function isPalindrome(text) {
+  const origin = text.toString();
   let compare = '';
   for (let i = origin.length - 1; i >= 0; i -= 1) {
     compare += origin[i];
   }
-  if (origin === compare) {
-    console.log('True');
-  } else {
-    console.log('False');
-  }
+  return origin === compare ? 'True' : 'False';
 }
+
+
+function solve(lines) { console.log(isPalindrome(lines)); }
 
 const readline = require('readline');
 
