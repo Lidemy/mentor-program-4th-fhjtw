@@ -1,18 +1,18 @@
+function isPrime(n) {
+  if (n === 1) return false;
+  for (let j = 2; j < n; j += 1) {
+    if (n % j === 0) return false;
+  }
+  return true;
+}
+
+
 function solve(lines) {
   for (let i = 1; i <= Number(lines[0]); i += 1) {
-    if (Number(lines[i]) === 1) {
-      console.log('Composite');
-    } else if (Number(lines[i]) === 2) {
+    if (isPrime(Number(lines[i]))) { // 如果是質數為真，印出"Prime"
       console.log('Prime');
     } else {
-      let isPrime = 0;
-      for (let j = 2; j < Number(lines[i]); j += 1) {
-        if (Number(lines[i]) % j === 0) {
-          isPrime = -1;
-          break;
-        }
-      }
-      console.log(isPrime === 0 ? 'Prime' : 'Composite');
+      console.log('Composite'); // 如果不是質數，印出"Composite"
     }
   }
 }
