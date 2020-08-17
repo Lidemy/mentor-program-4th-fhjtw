@@ -14,6 +14,8 @@ request({
      值是：`application/vnd.twitchtv.v5+json`。 */
   headers: {
     'Client-ID': clientID,
+    /* 自訂 HTTP Headers 標籤寫法示範文件：
+      https://github.com/request/request#custom-http-headers */
     Accept: 'application/vnd.twitchtv.v5+json',
     /* Informs the server about the types of data that can be sent back.
     It is MIME-type. */
