@@ -60,6 +60,7 @@ function createBook(name) {
   request.post({
     url: `${API_ENDPOINT}/books`,
     form: {
+      id: '1'
       name
     }
   }, (err, res) => {
