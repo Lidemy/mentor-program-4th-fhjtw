@@ -1,18 +1,505 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
   <meta charset="utf-8">
 
-  <title>The HTML5 Herald</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
+  <title>餐廳官網</title>
+  <!-- meta RWD -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+  <!-- 引入 normalize.css -->
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
+  <style>
+    .navbar {
+      /* 讓整個 navbar 區塊有陰影，否則全白畫面看不出來區隔 */
+      box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+      position: fixed;
+      z-index: 100;
+      /* 讓 navbar 置頂，排序在最上層 */
+      width: 100%;
+      background-color: white;
+      /* 撐開 navbar 並填滿區塊底色 */
+    }
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+    .navbar .wrapper {
+      display: flex;
+      /* 把底下元素左右撐開 */
+      justify-content: space-between;
+      /* 讓物件垂直置中 */
+      align-items: center;
+      height: 84px;
+      background: white;
+      padding: 0px 20px;
+    }
+
+    .wrapper {
+      max-width: 1280px;
+      /* 讓區塊水平置中 */
+      margin: 0 auto;
+      padding: 0px 12px;
+      /* 避免文字內容貼邊 */
+    }
+
+    .navbar__site-name {
+      color: #489846;
+      font-size: 36px;
+    }
+
+    .navbar__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      font-size: 18px;
+    }
+
+    .navbar__list li {
+      margin-left: 12px;
+      /* 圓角設在 li 才顯示得出來 */
+      border-radius: 8px;
+      transition: background 0.1s ease-in;
+    }
+
+    .navbar__list li a {
+      /* 將 display 設為 block 才能讓 padding 撐開元素，a 就變成整個都能點 */
+      display: block;
+      padding: 12px 24px;
+      /* 拿掉 a 的超連結底線 */
+      text-decoration: none;
+      color: black;
+    }
+
+    .navbar__list li.active,
+    .navbar__list li:hover {
+      background: #ff7286;
+    }
+
+    .navbar__list li.active a,
+    .navbar__list a:hover {
+      color: white;
+    }
+
+    .banner h1 {
+      margin: 0;
+      color: white;
+      display: inline-block;
+      /* 才會有正確的元素尺寸 */
+      position: relative;
+      z-index: 2;
+      /* 讓字可以在最上層，雖然沒有要用到 relative 但 position 屬性要改 */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* 讓定位點依此元素的尺寸比例(%)移動，達到置中目的 */
+      font-family: MicrosoftJhengHei;
+      font-size: 60px;
+      font-weight: bold;
+    }
+
+    .banner {
+      position: relative;
+      /* 為了半透明遮罩的定位，改 relative */
+      height: 385px;
+      /* 要有高度圖片才設定得出來 */
+      background: url("bg.jpg") center/cover no-repeat;
+      /* 一句話寫法可以查css shorthand */
+      top: 84px;
+      margin-bottom: 84px;
+      /* 為了 navbar fixed 固定而往下移動 84px */
+    }
+
+    /* 在 banner 上蓋上一層半透明遮罩 */
+    .banner:after {
+      content: '';
+      /* 要有content不然 :after 顯示不出來 */
+      position: absolute;
+      /* absolute 會往上找第一個不是 static 的元素來定位 */
+      background: rgba(0, 0, 0, 0.4);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .section {
+      text-align: center;
+    }
+
+    .section__title {
+      margin: 80px 0px 36px 0px;
+      display: inline-block;
+      font-size: 36px;
+      border-left: solid 15px #a3dea2;
+      padding-left: 16px;
+    }
+
+    .section__desc {
+      margin: 0;
+      font-size: 16px;
+      line-height: 2em;
+    }
+
+    .buttons {
+      margin: 80px 0px;
+    }
+
+    .button {
+      display: inline-block;
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 0.32px;
+      color: #3e613d;
+      padding: 60px 80px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.1s ease-in;
+    }
+
+    .button:hover {
+
+      transform: scale(1.1);
+      background-color: transparent;
+    }
+
+    .order {
+      background-color: #a8e8e1;
+      border: solid 3px #a8e8e1;
+    }
+
+    .check {
+      margin-left: 24px;
+      background-color: #f9f9b5;
+      border: solid 3px #f9f9b5;
+    }
+
+    .section__img {
+      display: flex;
+      line-height: 0;
+    }
+
+    .section__img div {
+      width: 25%;
+
+    }
+
+    .section__img div img {
+      width: 100%;
+    }
+
+    .rate {
+      display: flex;
+      margin-top: 72px;
+    }
+
+    .rate__card {
+      position: relative;
+      border-radius: 5px;
+      box-shadow: -1.4px -1.4px 4px 0 #d8eaef;
+      border: solid 1px #c7e5ec;
+      background-color: white;
+      height: 200px;
+      padding: 16px;
+      width: 33%;
+    }
+
+    .rate__card+.rate__card {
+      margin-left: 16px;
+      /* 從第二張評論卡後增加左邊距 */
+    }
+
+    .rate__rater {
+      position: absolute;
+      display: inline-block;
+      transform: translate(-50%, -50%);
+      top: 18px;
+      /* 下移文字的行高 18px */
+      left: 50%;
+    }
+
+    .rate__avatar {
+      width: 105px;
+      height: 105px;
+      /* 定義圖片尺寸 */
+      border-radius: 50%;
+      /* 圓角為半徑時（50%）會是正圓 */
+      overflow: hidden;
+      /* 遮住超出的範圍 */
+    }
+
+    .rate__avatar img {
+      width: 100%;
+      height: 100%;
+      /* 圖片填滿上一層的框架，尺寸由上一層容器定義 */
+    }
+
+    .rate__name {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 16px;
+      letter-spacing: 0.14px;
+      line-height: 18px;
+
+    }
+
+    .rate__msg {
+      position: relative;
+      top: 30%;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+
+    .footer__top {
+      font-size: 14px;
+      color: #484848;
+      background-color: #e8efee;
+      padding: 40px;
+    }
+
+    .footer__top .wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer__site {
+      font-size: 36px;
+      color: #489846;
+    }
+
+    .footer__SNS a {
+      color: #484848;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .footer__SNS a:hover {
+      color: #489846;
+    }
+
+    .footer__buttom {
+      max-width: 100%;
+      height: 5%;
+      background-color: #35564b;
+      color: white;
+      font-size: 16px;
+      text-align: center;
+      padding: 16px;
+    }
+
+    /* 設定 RWD，平板寬度一般為 768px */
+    @media(max-width: 768px) {
+      .navbar .wrapper {
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+        height: 120px;
+        flex-direction: column;
+        padding: 0px;
+      }
+
+      .banner {
+        top: 120px;
+        margin-bottom: 120px;
+      }
+
+      .navbar__site-name {
+        margin-top: 10px;
+      }
+
+      .navbar__list {
+        width: 100%;
+      }
+
+      .navbar__list li {
+        flex: 1;
+        margin-left: 0;
+        border-radius: 0;
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .banner {
+        height: 200px;
+      }
+
+      .banner h1 {
+        font-size: 45px;
+      }
+
+      .buttons {
+        margin: 40px 16px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .check {
+        margin-left: 0;
+        margin-top: 16px;
+      }
+
+      .section__title {
+        margin: 50px 0px 30px 0px;
+      }
+
+      .section__img {
+        flex-wrap: wrap;
+      }
+
+      .section__img div {
+        width: 50%;
+      }
+
+      .rate {
+        flex-direction: column;
+      }
+
+      .rate__card {
+        width: unset;
+        height: 130px;
+      }
+
+      .rate__card+.rate__card {
+        margin-top: 82px;
+        margin-left: 0;
+      }
+
+      .rate__msg {
+        font-size: 14px;
+      }
+
+      .footer__top .wrapper {
+        flex-direction: column-reverse;
+      }
+
+      .footer__info {
+        margin-top: 1.5em;
+      }
+    }
+  </style>
 
 </head>
 
 <body>
-  <script src="js/scripts.js"></script>
+  <!-- 上方導覽列 header-->
+  <nav class="navbar">
+    <div class="wrapper">
+      <div class="navbar__site-name">
+        Just A Bite!
+      </div>
+      <ul class="navbar__list">
+        <li class="active"><a href="#">抽個大獎</a></li>
+        <li><a href="#">我要點餐</a></li>
+        <li><a href="#">查詢訂單</a></li>
+        <li><a href="#">常見問題</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- 大圖 Banner -->
+  <section class="banner">
+    <h1>咬一口廚房</h1>
+  </section>
+  <!-- 文案區塊 -->
+  <section class="section info">
+    <h2 class="section__title">當輕食之風盛起</h2>
+    <div class="wrapper">
+      <p class="section__desc">由於現代人生活忙碌，常以外食為主，當高糖、高鹽、高油成為人們的日常，會導致慢性疾病與肥胖的機率大增。
+        <br>
+        我們定期走訪農田，選用最天然、營養的食材，以簡單的烹調方式處理，最大化忠實呈現食材原本的鮮味。
+        <br>
+        咬一口不只賣餐點，我們希望能夠讓大家愛上料理的魅力，餐館特意打造全開放式廚房，烹調透明化，也不定時舉辦美食廚房DIY，讓大家體驗不需要過多調味，就能擁有千變萬化的食物口感。
+      </p>
+
+      <div class="buttons">
+        <div class="button order">
+          我要點餐
+        </div>
+        <div class="button check">
+          查詢訂單
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+  <!-- 菜單區 -->
+  <section class="section menu">
+    <h2 class="section__title">Menu 搶先看</h2>
+    <div class="section__img">
+      <div><img src="dish-1.png"></img></div>
+      <div><img src="dish-2.png"></img></div>
+      <div><img src="dish-3.png"></img></div>
+      <div><img src="dish-4.png"></img></div>
+    </div>
+  </section>
+  <!-- 評論區 -->
+  <div class="wrapper">
+    <section class="section rating">
+      <h2 class="section__title">吃過都說好</h2>
+      <div class="rate">
+        <div class="rate__card">
+          <div class="rate__rater">
+            <div class="rate__avatar">
+              <img src="avatar-1.png"></img>
+            </div>
+            <h6 class="rate__name">Andrew Woof</h6>
+          </div>
+          <p class="rate__msg">汪汪汪汪汪汪汪，汪汪汪汪！汪汪汪汪汪汪，汪汪汪汪汪汪汪汪汪，汪汪汪汪汪汪汪。汪汪汪汪，汪汪汪汪汪汪汪～
+          </p>
+        </div>
+        <div class="rate__card">
+          <div class="rate__rater">
+            <div class="rate__avatar">
+              <img src="avatar-2.png"></img>
+            </div>
+            <h6 class="rate__name">Bella Meow</h6>
+          </div>
+          <p class="rate__msg">喵喵喵喵喵喵喵，喵喵喵喵喵喵，喵喵喵！喵喵喵喵喵喵喵喵喵喵喵，喵喵喵喵喵喵喵喵，喵喵喵喵喵喵，喵喵喵喵❤️
+          </p>
+        </div>
+        <div class="rate__card">
+          <div class="rate__rater">
+            <div class="rate__avatar">
+              <img src="avatar-3.png"></img>
+            </div>
+            <h6 class="rate__name">Chelsea Chirp</h6>
+          </div>
+          <p class="rate__msg">啾啾啾啾啾，啾啾啾！啾啾啾啾啾啾啾啾啾啾啾，啾啾啾啾、啾啾啾啾、啾啾啾啾啾啾、⋯⋯。啾啾啾啾啾啾啾！
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- 地圖 -->
+  <section class="section map">
+    <h2 class="section__title">我們在哪裡</h2>
+    <div class="wrapper">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.0064921633143!2d121.56234071487506!3d25.03385374445155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb6da80a7ad%3A0xacc4d11dc963103c!2z5Y-w5YyXMTAx!5e0!3m2!1szh-TW!2stw!4v1600614903368!5m2!1szh-TW!2stw"
+        width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+        tabindex="0"></iframe>
+    </div>
+  </section>
+  <!-- 下方資訊欄 footer -->
+  <footer>
+    <div class="footer__top">
+      <div class="wrapper">
+        <div class="footer__info">
+          <div>餐館地址：天上地下天堂路三分之一里六段520號</div>
+          <div>訂位專線：02-1314-5566</div>
+          <div>營業時間：週一〜週五 09:00~18:00 / 週六、週日、國定假日（含連假）休息</div>
+          <div>email：service@justabite.com.tw</div>
+        </div>
+        <div class="footer__about">
+          <div class="footer__site">Just A Bite!</div>
+          <div class="footer__SNS">
+            <a href="#">Facebook</a> / <a href="#">Instagram</a> / <a href="#">YouTube</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__buttom">
+      Copyright © 2020 Just A Bite All Rights Reserved. 咬一口股份有限公司版權所有
+    </div>
+  </footer>
 </body>
+
 </html>
