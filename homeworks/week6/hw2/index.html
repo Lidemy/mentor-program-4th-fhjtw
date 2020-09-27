@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>新拖延運動表單</title>
+  <!-- meta RWD -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+  <!-- 引入 normalize.css -->
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
+  <style>
+    body {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .wrapper {
+      max-width: 645px;
+      margin: 10% auto;
+      background-color: white;
+      box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+      border-top: solid 8px #fad312;
+      padding: 40px 35px;
+    }
+
+    .form__title {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .form__desc {
+      margin-top: 34px;
+      font-size: 14px;
+      line-height: 1.5em;
+    }
+
+    .notice {
+      color: #e74149;
+      font-size: 16px;
+      margin: 22px 0 3px 0;
+    }
+
+    .input-block__title {
+      font-size: 20px;
+      font-weight: 500;
+      margin: 50px 0 20px 0;
+    }
+
+    .require:after {
+      content: ' *';
+      color: #e74149;
+      font-size: 16px;
+    }
+
+    input[type="text"] {
+      padding: 5px;
+      width: 287px;
+      max-width: 80%;
+      margin: 0 auto;
+      border: solid 1px #d0d0d0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* 文字框點選/輸入時，底色標黃 */
+    input[type="text"]:focus {
+      background-color: rgba(250, 211, 18, 0.3);
+    }
+
+    /* 單選框整條的定位 */
+    .input-block__input label {
+      display: block;
+      position: relative;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+
+    /* 單選框文字尺寸/定位 */
+    .input-block__input label span {
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+      position: absolute;
+    }
+
+    /* 單選框 radio 樣式 */
+    input[type="radio"] {
+      position: relative;
+      appearance: none;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      border: 1px solid #d0d0d0;
+      background-color: #bababa;
+      transition: 0.2s all linear;
+      outline: none;
+      margin-right: 9px;
+      cursor: pointer;
+    }
+
+    /* 移動到上方變黃圈 */
+    input[type="radio"]:hover, input[type="radio"]:checked {
+      border: 2px solid #fad312;
+      background-color: white;
+    }
+
+    /* 圈選後放大、變黃 */
+    input[type="radio"]:checked {
+      border: 6px solid #fad312;
+      width: 16px;
+      height: 16px;
+    }
+
+    
+
+    .inline-block__desc {
+      margin-bottom: 24px;
+    }
+
+    input[type="submit"] {
+      background-color: #fad312;
+      border: none;
+      color: black;
+      padding: 13px 32px;
+      text-decoration: none;
+      margin: 55px 0 21px 0;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.1s ease-in;
+    }
+
+    input[type="submit"]:hover {
+      color: white;
+      font-size: 16px;
+    }
+    p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      font-size: 13px;
+      text-align: center;
+      padding: 26px 0;
+      width: 100%;
+      display: inline-block;
+    }
+
+    @media(max-width: 768px) {
+      .wrapper {
+        max-width: 86%;
+        padding: 8% 6%;
+        margin: 10% 4%;
+      }
+
+      .form__title {
+        font-size: 2em;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- 表單本體 -->
+  <div class="wrapper">
+    <div class="form">
+      <h1 class="form__title">新拖延運動報名表單</h1>
+      <p class="form__desc">活動日期：2020/12/10 ~ 2020/12/11
+        <br>
+        活動地點：台北市大安區新生南路二段1號
+      </p>
+
+      <div class="notice">*必填</div>
+      <div class="input-block">
+        <div class="input-block__title require">暱稱</div>
+        <div class="input-block__input">
+          <input name="nickname" type="text" placeholder="您的回答">
+        </div>
+      </div>
+      <div class="input-block">
+        <div class="input-block__title require">電子郵件</div>
+        <div class="input-block__input">
+          <input name="nickname" type="text" placeholder="您的電子郵件">
+        </div>
+      </div>
+      <div class="input-block">
+        <div class="input-block__title require">手機號碼</div>
+        <div class="input-block__input">
+          <input name="mobile" type="text" placeholder="您的手機號碼">
+        </div>
+      </div>
+      <div class="input-block">
+        <div class="input-block__title require">報名類型</div>
+        <div class="input-block__input radio">
+          <label><input name="type" value="1" type="radio"><span>躺在床上用想像力實作</span></label>
+          <label><input name="type" value="2" type="radio"><span>趴在地上滑手機找現成的</span></label>
+        </div>
+      </div>
+      <div class="input-block">
+        <div class="input-block__title require">怎麼知道這個活動的？</div>
+        <div class="input-block__input">
+          <input name="referral" type="text" placeholder="您的回答">
+        </div>
+      </div>
+      <div class="input-block">
+        <div class="input-block__title">其他</div>
+        <div class="inline-block__desc">對活動的一些建議</div>
+        <div class="input-block__input">
+          <input name="suggestion" type="text" placeholder="您的回答">
+        </div>
+      </div>
+      <input name="submit__form" type="submit">
+      <p>請勿透過表單送出您的密碼。</p>
+    </div>
+  </div>
+  <!-- 下方資訊欄 footer -->
+  <footer>
+    © 2020 © Copyright. All rights Reserved.
+  </footer>
+</body>
+
+</html>
