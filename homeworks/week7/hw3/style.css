@@ -1,0 +1,9 @@
+.debug *, .debug {
+  outline: 1px solid gold;
+}
+
+
+/* 設定 RWD，平板寬度一般為 768px */
+@media(max-width: 768px) {
+
+}
