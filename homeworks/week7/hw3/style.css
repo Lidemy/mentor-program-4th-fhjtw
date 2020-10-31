@@ -1,9 +1,173 @@
-.debug *, .debug {
+/* .debug *, .debug {
   outline: 1px solid gold;
+} */
+
+.toDoList__wrapper {
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 5px 5px 8px 1px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper {
+  margin: 40px auto;
+  max-width: 1000px;
+  width: 90%;
+  background-color: cornsilk;
+}
+h1 {
+  font-size: 36px;
+  color: #3B7391;
+  font-weight: 800;
+  text-align: center;
+  padding: 20px 0 0 0;
+  filter: drop-shadow(3px 3px 0px rgba(135,192,222));
+}
+
+.input__block {
+  width: fit-content;
+  padding: 16px;
+  display: flex;
+}
+.add__task {
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  flex: 1;
+  outline-style: none;
+  border: none;
+  border-bottom: solid 1px burlywood;
+  color: burlywood;
+  background-color: white;
+}
+
+.add__task:hover, .add__task:focus {
+  border-bottom: solid 3px burlywood;
+}
+
+.add__task::placeholder {
+  color: burlywood;
+}
+
+.btn-new {
+  background-color: burlywood;
+  border: none;
+  color: white;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+.task {
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  margin: 10px;
+}
+/* 待辦事項名稱，同時也是 label 標籤底下包著 checkbox input */
+.task__name {
+  display: block;
+  position: relative;
+  padding-left: 40px;
+  cursor: pointer;
+  flex: 1;
+  line-height: 20px;
+  color: #333;
+}
+
+.task__name input{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+/* 建立新的勾選框 */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 25%;
+}
+
+.task__name:hover {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #3B7391;
+}
+
+.task__name:hover input ~ .checkmark {
+  background-color: #ddd;
+}
+
+.task__name input:checked ~ .checkmark {
+  background-color: burlywood;
+}
+
+/* 做出勾選的勾，預設隱藏 */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* 當被勾選時，顯示勾選符號 */
+.task__name input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* 用 border 畫出勾勾*/
+.task__name .checkmark:after {
+  left: 7px;
+  top: 2.5px;
+  width: 2.5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.btn-delete {
+  background-color: transparent;
+  border: none;
+  height: 20px;
+  width: 20px;
+}
+.btn-delete:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 16px;
+  transform: rotate(45deg)  translate(-220%,-35%);
+  background-color: #666;
+}
+.btn-delete:after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 16px;
+  transform: rotate(-45deg) translate(300%,-25%);
+  background-color: #666;
+  
+}
+
+.btn-delete:hover:after{
+  color: #3B7391;
 }
 
 
-/* 設定 RWD，平板寬度一般為 768px */
-@media(max-width: 768px) {
 
+/* .task__name 加上 done 時*/
+.task__name.done{
+  /* 加上刪除線 */
+  text-decoration: line-through;
+  text-decoration-color: #3B7391; 
+  /* 文字變灰 */
+  color: #666666;
+  /* 設為斜體 */
+  font-style: italic;
 }

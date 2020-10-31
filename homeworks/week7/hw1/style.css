@@ -1,6 +1,6 @@
-.debug *, .debug {
+/* .debug *, .debug {
   outline: 1px solid gold;
-}
+} */
 
 body {
   background: rgba(0, 0, 0, 0.3);

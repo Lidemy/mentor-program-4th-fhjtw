@@ -13,15 +13,41 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-<body>
+<body class="debug">
   <!-- 本體 -->
-  <div class="wrapper">
-   
+  <div class="toDoList__wrapper wrapper">
+    <h1 class="title">Todo List</h1>
+    
+    <div class="wrapper">
+      <div class="input__block">
+        <input class="add__task" type="text" size="100" placeholder="Add something to do here ..." />
+        <button class="btn-new">新增</button>
+      </div>
+      <div class="task__list">
+        <div class="task">
+          <label class="task__name">Sleep by 11 p.m.
+            <input type="checkbox" class="task__checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <button class="btn-delete"></button>
+        </div>
+        <div class="task">
+          <label class="task__name">Pack my bag.
+            <input type="checkbox" class="task__checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <button class="btn-delete"></button>
+        </div>
+        <div class="task">
+          <label class="task__name">Test the function.
+            <input type="checkbox" class="task__checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <button class="btn-delete"></button>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- 下方資訊欄 footer -->
-  <footer>
-    © 2020 © Copyright. All rights Reserved.
-  </footer>
 </body>
 
 </html>

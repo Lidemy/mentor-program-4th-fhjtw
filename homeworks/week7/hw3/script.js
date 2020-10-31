@@ -1,17 +1,43 @@
-// e.target = 實際發出事件者；e.currentTarget = 監聽事件者。
-document.querySelector('.qna__wrapper').addEventListener('click', (e) => {
-  // console.log(e.target.className)
-  const element = e.target.closest('.qna');
-  if (element) {
-    element.classList.toggle('qna__hide');
-  }
-});
-/* qna__wrapper (監聽，包裹所有 qna)
-  -> qna
-  -> qna__num & qna__content(qna__title & qna__answer)
+// 當點下 .btn-new 按鈕時，抓取 .add__task 裡輸入的值
+document.querySelector('.btn-new').addEventListener('click', () => {
+  // 下面這行 eslint 建議用物件解構，原本寫 const value = document.querySelector('.add__task').value;
+  const { value } = document.querySelector('.add__task');
+  // 如果 .add__task 裡的值為空，直接返回
+  if (!value) return;
 
-  qna / num / content / title / answer 都可能是 e.target，
-  所以 e.target.closest('.qna') 最高就到 .qna 為止，
-  .qna 以下的 e.target.closest('.qna') 都選得到 .qna 這個 class。
-  .qna__wrapper 因為是 .qna 外層，所以我們要設定一個變數 elenent 代表 e.target.closest('.qna')，
-  當 element 為 true 時，才執行 classList.toggle；element 為 false 時代表選取到的是 qna__wrapper，不做任何動作。 */
+  // 新增一個 div 元素
+  const div = document.createElement('div');
+  /* 為新增的 div 加上 classname -> <div class="task"></div> */
+  div.classList.add('task');
+  div.innerHTML = `
+  <label class="task__name">${value}
+    <input type="checkbox">
+    <span class="checkmark" class="task__checkbox"></span>
+  </label>
+  <button class="btn-delete"></button>
+  `;
+  // 在 .task__list 底下新增 上面設定的 div
+  document.querySelector('.task__list').appendChild(div);
+  // 清空輸入欄 .add__task 內容
+  document.querySelector('.add__task').value = '';
+});
+
+// 當點下 .btn-delete 按鈕時
+document.querySelector('.task__list').addEventListener('click', (e) => {
+  const { target } = e;
+  // 刪除todo
+  if (target.classList.contains('btn-delete')) {
+    target.parentNode.remove();
+    return 0;
+  }
+
+  // 完成 todo，點擊 todo 項目 label 時，target 是 <input class="task__checkbox">
+  if (target.checked) {
+    target.parentNode.classList.add('done');
+    // console.log(`the target is ${target.className} and target checked is ${target.checked}`);
+    // console.log(`parent node is ${target.parentNode.className}`);
+  } else {
+    target.parentNode.classList.remove('done');
+  }
+  return 0;
+});
