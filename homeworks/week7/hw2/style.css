@@ -1,0 +1,428 @@
+.debug *, .debug {
+  outline: 1px solid gold;
+}
+.navbar {
+  /* 讓整個 navbar 區塊有陰影，否則全白畫面看不出來區隔 */
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+  position: fixed;
+  z-index: 100;
+  /* 讓 navbar 置頂，排序在最上層 */
+  width: 100%;
+  background-color: white;
+  /* 撐開 navbar 並填滿區塊底色 */
+}
+
+.navbar .wrapper {
+  display: flex;
+  /* 把底下元素左右撐開 */
+  justify-content: space-between;
+  /* 讓物件垂直置中 */
+  align-items: center;
+  height: 84px;
+  background: white;
+  padding: 0px 20px;
+}
+
+.wrapper {
+  max-width: 1280px;
+  /* 讓區塊水平置中 */
+  margin: 0 auto;
+  padding: 0px 12px;
+  /* 避免文字內容貼邊 */
+}
+
+.navbar__site-name {
+  color: #489846;
+  font-size: 36px;
+}
+
+.navbar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  font-size: 18px;
+}
+
+.navbar__list li {
+  margin-left: 12px;
+  /* 圓角設在 li 才顯示得出來 */
+  border-radius: 8px;
+  transition: background 0.1s ease-in;
+}
+
+.navbar__list li a {
+  /* 將 display 設為 block 才能讓 padding 撐開元素，a 就變成整個都能點 */
+  display: block;
+  padding: 12px 24px;
+  /* 拿掉 a 的超連結底線 */
+  text-decoration: none;
+  color: black;
+}
+
+.navbar__list li.active,
+.navbar__list li:hover {
+  background: #ff7286;
+}
+
+.navbar__list li.active a,
+.navbar__list a:hover {
+  color: white;
+}
+.wrapper__big {
+  padding: 84px 0 0 0;
+}
+.banner h1 {
+  margin: 0;
+  color: white;
+  display: inline-block;
+  /* 才會有正確的元素尺寸 */
+  position: relative;
+  z-index: 2;
+  /* 讓字可以在最上層，雖然沒有要用到 relative 但 position 屬性要改 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* 讓定位點依此元素的尺寸比例(%)移動，達到置中目的 */
+  font-family: MicrosoftJhengHei;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.banner {
+  position: relative;
+  /* 為了半透明遮罩的定位，改 relative */
+  height: 385px;
+  /* 要有高度圖片才設定得出來 */
+  background: url("bg.jpg") center/cover no-repeat;
+  /* 一句話寫法可以查css shorthand */
+}
+
+/* 在 banner 上蓋上一層半透明遮罩 */
+.banner:after {
+  content: '';
+  /* 要有content不然 :after 顯示不出來 */
+  position: absolute;
+  /* absolute 會往上找第一個不是 static 的元素來定位 */
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.section {
+  text-align: center;
+}
+
+.section__title {
+  margin: 80px 0px 36px 0px;
+  display: inline-block;
+  font-size: 36px;
+  border-left: solid 15px #a3dea2;
+  padding-left: 16px;
+}
+
+.section__desc {
+  margin: 0;
+  font-size: 16px;
+  line-height: 2em;
+}
+
+.buttons {
+  margin: 80px 0px;
+}
+
+.button {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 0.32px;
+  color: #3e613d;
+  padding: 60px 80px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.button:hover {
+
+  transform: scale(1.1);
+  background-color: transparent;
+}
+
+.order {
+  background-color: #a8e8e1;
+  border: solid 3px #a8e8e1;
+}
+
+.check {
+  margin-left: 24px;
+  background-color: #f9f9b5;
+  border: solid 3px #f9f9b5;
+}
+
+.section__img {
+  display: flex;
+  line-height: 0;
+}
+
+.section__img div {
+  width: 25%;
+
+}
+
+.section__img div img {
+  width: 100%;
+}
+
+.rate {
+  display: flex;
+  margin-top: 72px;
+}
+
+.rate__card {
+  position: relative;
+  border-radius: 5px;
+  box-shadow: -1.4px -1.4px 4px 0 #d8eaef;
+  border: solid 1px #c7e5ec;
+  background-color: white;
+  height: 200px;
+  padding: 16px;
+  width: 33%;
+}
+
+.rate__card+.rate__card {
+  margin-left: 16px;
+  /* 從第二張評論卡後增加左邊距 */
+}
+
+.rate__rater {
+  position: absolute;
+  display: inline-block;
+  transform: translate(-50%, -50%);
+  top: 18px;
+  /* 下移文字的行高 18px */
+  left: 50%;
+}
+
+.rate__avatar {
+  width: 105px;
+  height: 105px;
+  /* 定義圖片尺寸 */
+  border-radius: 50%;
+  /* 圓角為半徑時（50%）會是正圓 */
+  overflow: hidden;
+  /* 遮住超出的範圍 */
+}
+
+.rate__avatar img {
+  width: 100%;
+  height: 100%;
+  /* 圖片填滿上一層的框架，尺寸由上一層容器定義 */
+}
+
+.rate__name {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 16px;
+  letter-spacing: 0.14px;
+  line-height: 18px;
+
+}
+
+.rate__msg {
+  position: relative;
+  top: 30%;
+  line-height: 1.5em;
+  font-size: 16px;
+  margin-top: 23px;
+}
+
+.footer__top {
+  font-size: 14px;
+  color: #484848;
+  background-color: #e8efee;
+  padding: 40px;
+}
+
+.footer__top .wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__site {
+  font-size: 36px;
+  color: #489846;
+}
+
+.footer__SNS a {
+  color: #484848;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.footer__SNS a:hover {
+  color: #489846;
+}
+
+.footer__buttom {
+  max-width: 100%;
+  height: 5%;
+  background-color: #35564b;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  padding: 16px;
+}
+
+/* FAQ 區塊 */
+.qna__wrapper {
+  width: 100%;
+  max-width: 810px;
+  padding: 24px 0 40px 0;
+  margin: 0 auto;
+}
+
+.qna {
+  display: flex;
+  text-align: left;
+  padding: 0 20px 0 17px;
+  border-bottom: solid 1px #70b282;
+  cursor: pointer;
+}
+/* 設定隱藏狀態，把QA區塊高度設固定，讓超過的內容隱藏起來 */
+.qna__hide {
+  height: 52px;
+  overflow: hidden;
+}
+
+.qna + .qna {
+  margin-top: 28px;
+}
+
+.qna__num {
+  font-size: 24px;
+  letter-spacing: 0.22px;
+  color: #70b282;
+  line-height: 24px;
+}
+.qna__num::before {
+  content: "Q";
+}
+.qna__num::after {
+  content: ":";
+}
+
+.qna__content {
+  margin-left: 16px;
+}
+.qna__title {
+  font-size: 18px;
+  letter-spacing: 0.16px;
+  line-height: 24px;
+}
+.qna__answer {
+  font-size: 16px;
+  letter-spacing: 0.14px;
+  margin: 24px 0 17px 0 ;
+  line-height: normal;
+  opacity: 100;
+  transition: all 0.5s ease, opacity 0.1s;
+}
+/* 把 Q&A toggle 切換的動畫放在 answer 的 opacity 和 margin 上 */
+.qna__hide .qna__content .qna__answer {
+  opacity: 0;
+  margin: 0;
+  transition: all 0.5s ease, opacity 0.1s;
+}
+
+/* 設定 RWD，平板寬度一般為 768px */
+@media(max-width: 768px) {
+  .navbar .wrapper {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 120px;
+    flex-direction: column;
+    padding: 0px;
+  }
+  .wrapper__big {
+    padding: 120px 0 0 0;
+  }
+
+  .navbar__site-name {
+    margin-top: 10px;
+  }
+
+  .navbar__list {
+    width: 100%;
+  }
+
+  .navbar__list li {
+    flex: 1;
+    margin-left: 0;
+    border-radius: 0;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .banner {
+    height: 200px;
+  }
+
+  .banner h1 {
+    font-size: 45px;
+  }
+
+  .buttons {
+    margin: 40px 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .check {
+    margin-left: 0;
+    margin-top: 16px;
+  }
+
+  .section__title {
+    margin: 50px 0px 30px 0px;
+  }
+
+  .section__img {
+    flex-wrap: wrap;
+  }
+
+  .section__img div {
+    width: 50%;
+  }
+
+  .rate {
+    flex-direction: column;
+  }
+
+  .rate__card {
+    width: unset;
+    height: 130px;
+  }
+
+  .rate__card+.rate__card {
+    margin-top: 82px;
+    margin-left: 0;
+  }
+
+  .rate__msg {
+    font-size: 14px;
+    top: 40%;
+  }
+
+  .footer__top .wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .footer__info {
+    margin-top: 1.5em;
+  }
+}
